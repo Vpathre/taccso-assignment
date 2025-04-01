@@ -1,7 +1,7 @@
 # taccso-assignment
 
 ## Overview
-Extending on the LibreChat platform and TAccSo's implementation, this assignment focused on implementing a jurisdiction selection feature that allows a user to select the jurisdiction they would like to set as the context for the LLM-based responses they recieve.
+Extending on the LibreChat platform, this assignment focused on implementing a jurisdiction selection feature that allows a user to select the jurisdiction they would like to set as the context for the LLM-based responses they recieve.
 
 ## Setup & Installation
 Used docker compose to set up project. 
