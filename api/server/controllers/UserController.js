@@ -164,6 +164,21 @@ const resendVerificationController = async (req, res) => {
   }
 };
 
+const updateUserLocationController = async (req, res) => {
+  try {
+    const { location } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { location },
+      { new: true },
+    );
+    res.json({ location: user.location });
+  } catch (error) {
+    console.error('Error updating user location:', error);
+    res.status(500).json({ message: 'Error updating location' });
+  }
+};
+
 module.exports = {
   getUserController,
   getTermsStatusController,
@@ -172,4 +187,5 @@ module.exports = {
   verifyEmailController,
   updateUserPluginsController,
   resendVerificationController,
+  updateUserLocationController,
 };

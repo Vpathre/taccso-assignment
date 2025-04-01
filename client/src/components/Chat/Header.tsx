@@ -6,6 +6,7 @@ import ModelSelector from './Menus/Endpoints/ModelSelector';
 import { PresetsMenu, HeaderNewChat } from './Menus';
 import { useGetStartupConfig } from '~/data-provider';
 import ExportAndShareMenu from './ExportAndShareMenu';
+import LocationDropdown from './Menus/LocationDropdown';
 import { useMediaQuery, useHasAccess } from '~/hooks';
 import BookmarkMenu from './Menus/BookmarkMenu';
 import AddMultiConvo from './AddMultiConvo';
@@ -47,9 +48,12 @@ export default function Header() {
             />
           )}
         </div>
-        {!isSmallScreen && (
-          <ExportAndShareMenu isSharedButtonEnabled={startupConfig?.sharedLinksEnabled ?? false} />
-        )}
+        <div className="flex items-center gap-2">
+          {!isSmallScreen && (
+            <ExportAndShareMenu isSharedButtonEnabled={startupConfig?.sharedLinksEnabled ?? false} />
+          )}
+          {<LocationDropdown />}
+        </div>
       </div>
       {/* Empty div for spacing */}
       <div />

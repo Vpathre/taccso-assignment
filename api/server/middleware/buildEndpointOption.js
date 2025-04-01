@@ -11,6 +11,7 @@ const agents = require('~/server/services/Endpoints/agents');
 const custom = require('~/server/services/Endpoints/custom');
 const google = require('~/server/services/Endpoints/google');
 const { handleError } = require('~/server/utils');
+const { generateLocationPrompt } = require('~/app/clients/prompts/location');
 
 const buildFunction = {
   [EModelEndpoint.openAI]: openAI.buildOptions,
@@ -83,6 +84,14 @@ async function buildEndpointOption(req, res, next) {
 
     // TODO: use object params
     req.body.endpointOption = await builder(endpoint, parsedBody, endpointType);
+
+    // Add location-based prompt prefix
+    if (req.user?.location) {
+      const locationPrompt = generateLocationPrompt(req.user.location, endpointType ?? endpoint);
+      if (locationPrompt) {
+        req.body.endpointOption.promptPrefix = `${locationPrompt}\n${req.body.endpointOption.promptPrefix || ''}`.trim();
+      }
+    }
 
     // TODO: use `getModelsConfig` only when necessary
     const modelsConfig = await getModelsConfig(req);

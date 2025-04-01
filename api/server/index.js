@@ -1,6 +1,8 @@
 require('dotenv').config();
 const path = require('path');
-require('module-alias')({ base: path.resolve(__dirname, '..') });
+require('module-alias').addAliases({
+  '~': path.resolve(__dirname, '..'),
+});
 const cors = require('cors');
 const axios = require('axios');
 const express = require('express');

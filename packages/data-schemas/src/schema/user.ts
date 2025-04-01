@@ -30,6 +30,7 @@ export interface IUser extends Document {
   }>;
   expiresAt?: Date;
   termsAccepted?: boolean;
+  location?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -96,6 +97,11 @@ const User = new Schema<IUser>(
     role: {
       type: String,
       default: SystemRoles.USER,
+    },
+    location: {
+      type: String,
+      enum: ['us', 'za', 'uk', 'ca', 'au', 'in'],
+      default: 'us',
     },
     googleId: {
       type: String,
